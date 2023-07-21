@@ -1,9 +1,14 @@
 "use client";
+/**
+ * Home component is the main page of the application that displays a list of products fetched from the server.
+ * It uses react-query to fetch product data and displays product cards for each item.
+ */
 import Image from "next/image";
 import { ProductsFetch } from "../lib/ProductsFetch";
 import { Loader } from "react-feather";
 import { useQuery } from "react-query";
 import ProductsCard from "./components/ProductsCard";
+// Interface for the Product type
 
 interface Product {
   id: number;
@@ -12,12 +17,14 @@ interface Product {
   price: number;
   category: string;
 }
+// Home component
 
 export default function Home() {
+  // Home component
+
   const { data, status } = useQuery<Product[]>("products", () => {
     return ProductsFetch();
   });
-
 
   return (
     <main className="">
@@ -37,7 +44,6 @@ export default function Home() {
               key={item.id}
               id={item.id}
               img={item.image}
-              item={item}
               name={item.title}
               price={item.price}
               category={item.category}

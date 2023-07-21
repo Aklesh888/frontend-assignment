@@ -3,10 +3,19 @@ import React from 'react'
 import Link from 'next/link'
 import { ShoppingBag } from 'react-feather'
 
-const ProductsCard = (props: any) => {
+type props ={
+  id: number;
+  name: string;
+  img: string;
+  category: string;
+  price: number;
+
+}
+
+const ProductsCard = (props: props) => {
   return (
     <Link
-      href={`/search/${props.id}`}
+      href={`/products/${props.id}`}
       key={props.id}
       className="flex flex-col p-5 m-5 h-[550px] justify-center w-[450px] space-y-5 bg-zinc-700 rounded-lg  text-left hover:bg-zinc-500 border border-zinc-500"
     >
