@@ -14,6 +14,7 @@ import CartContextProvider from "./context/ShopContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
+
 // RootLayout component
 export default function RootLayout({
   children,
