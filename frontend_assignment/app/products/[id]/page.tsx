@@ -12,6 +12,7 @@ const SearchResult = (props: any) => {
     () => singleProductFetch(props.params.id)
   );
 
+  //checks the status of dara fetch
   if (status === "loading") {
     return (
       <div className=" h-screen flex items-center justify-center">
@@ -20,7 +21,6 @@ const SearchResult = (props: any) => {
     );
   }
 
-  console.log(product);
   return (
     <div className="flex flex-col justify-center items-center my-8 px-5 space-y-5">
       <div className="flex lg:flex-row flex-col justify-center items-center space-x-5">

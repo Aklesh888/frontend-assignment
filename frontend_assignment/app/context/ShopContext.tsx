@@ -1,9 +1,7 @@
 import React, { createContext, useState } from "react";
-import { useQuery } from "react-query";
-import { ProductsFetch } from "@/lib/ProductsFetch";
-
+// Creating a new context
 export const CartContext = createContext(null);
-
+// A utility function to get the default cart object
 const getDefaultCart = () => {
   let cart: any = {};
   for (let i = 1; i <= 20; i++) {
@@ -11,38 +9,35 @@ const getDefaultCart = () => {
   }
   return cart;
 };
+// The CartContextProvider component
 
 const CartContextProvider = (props: any) => {
+  // State to hold the cart items using useState hook
+
   const [cartItems, setCartItems]: any = useState(getDefaultCart());
-  const { data } = useQuery("data", ProductsFetch);
 
-  const getTotalAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = data.find((product: any) => product.id === Number(item));
-        totalAmount += cartItems[item] * itemInfo.price;
-      }
-    }
-
-    return Math.floor(totalAmount);
-  };
+  // Function to add an item to the cart
 
   const addToCart = (itemId: number) => {
     setCartItems((prev: any) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
   };
+
+  // Function to remove an item from the cart
+
   const removeFromCart = (itemId: number) => {
     setCartItems((prev: any) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
   };
+
+  // The context value that will be provided to the consuming components
 
   const contextvalue: any = {
     cartItems,
     addToCart,
     removeFromCart,
-    getTotalAmount,
   };
 
-  console.log(cartItems);
+  // Rendering the provider with the provided context value and children components
+
   return (
     <CartContext.Provider value={contextvalue}>
       {props.children}
